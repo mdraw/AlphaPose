@@ -57,8 +57,8 @@ def predict_transform(prediction, inp_dim, anchors, num_classes, CUDA = True):
     y_offset = torch.FloatTensor(b).view(-1,1)
     
     if CUDA:
-        x_offset = x_offset.cuda()
-        y_offset = y_offset.cuda()
+        x_offset = x_offset
+        y_offset = y_offset
     
     x_y_offset = torch.cat((x_offset, y_offset), 1).repeat(1,num_anchors).view(-1,2).unsqueeze(0)
     
@@ -68,7 +68,7 @@ def predict_transform(prediction, inp_dim, anchors, num_classes, CUDA = True):
     anchors = torch.FloatTensor(anchors)
     
     if CUDA:
-        anchors = anchors.cuda()
+        anchors = anchors
     
     anchors = anchors.repeat(grid_size*grid_size, 1).unsqueeze(0)
     prediction[:,:,2:4] = torch.exp(prediction[:,:,2:4])*anchors
@@ -251,8 +251,8 @@ def predict_transform_half(prediction, inp_dim, anchors, num_classes, CUDA = Tru
     y_offset = torch.FloatTensor(b).view(-1,1)
     
     if CUDA:
-        x_offset = x_offset.cuda().half()
-        y_offset = y_offset.cuda().half()
+        x_offset = x_offset.half()
+        y_offset = y_offset.half()
     
     x_y_offset = torch.cat((x_offset, y_offset), 1).repeat(1,num_anchors).view(-1,2).unsqueeze(0)
     
@@ -262,7 +262,7 @@ def predict_transform_half(prediction, inp_dim, anchors, num_classes, CUDA = Tru
     anchors = torch.HalfTensor(anchors)
     
     if CUDA:
-        anchors = anchors.cuda()
+        anchors = anchors
     
     anchors = anchors.repeat(grid_size*grid_size, 1).unsqueeze(0)
     prediction[:,:,2:4] = torch.exp(prediction[:,:,2:4])*anchors

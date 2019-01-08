@@ -55,7 +55,7 @@ if __name__ == "__main__":
     det_inp_dim = int(det_model.net_info['height'])
     assert det_inp_dim % 32 == 0
     assert det_inp_dim > 32
-    det_model.cuda()
+    det_model
     det_model.eval()
 
     # Load pose model
@@ -64,7 +64,7 @@ if __name__ == "__main__":
         pose_model = InferenNet_fast(4 * 1 + 1, pose_dataset)
     else:
         pose_model = InferenNet(4 * 1 + 1, pose_dataset)
-    pose_model.cuda()
+    pose_model
     pose_model.eval()
 
     runtime_profile = {
@@ -87,8 +87,8 @@ if __name__ == "__main__":
             runtime_profile['ld'].append(load_time)
             with torch.no_grad():
                 # Human Detection
-                img = Variable(img).cuda()
-                im_dim_list = im_dim_list.cuda()
+                img = Variable(img)
+                im_dim_list = im_dim_list
 
                 prediction = det_model(img, CUDA=True)
                 ckpt_time, det_time = getTime(ckpt_time)
@@ -119,7 +119,7 @@ if __name__ == "__main__":
                 pt1 = torch.zeros(boxes.size(0), 2)
                 pt2 = torch.zeros(boxes.size(0), 2)
                 inps, pt1, pt2 = crop_from_dets(inp, boxes, inps, pt1, pt2)
-                inps = Variable(inps.cuda())
+                inps = Variable(inps)
 
                 hm = pose_model(inps)
                 ckpt_time, pose_time = getTime(ckpt_time)

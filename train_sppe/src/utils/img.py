@@ -192,7 +192,7 @@ def cv_rotate(img, rot, resW, resH):
 def flip_v(x, cuda=False):
     x = flip(x.cpu().data)
     if cuda:
-        x = x.cuda()
+        x = x
     x = torch.autograd.Variable(x)
     return x
 
@@ -237,7 +237,7 @@ def shuffleLR(x, dataset):
 def shuffleLR_v(x, dataset, cuda=False):
     x = shuffleLR(x.cpu().data, dataset)
     if cuda:
-        x = x.cuda()
+        x = x
     x = torch.autograd.Variable(x)
     return x
 

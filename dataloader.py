@@ -278,7 +278,7 @@ class DetectionLoader:
         self.det_inp_dim = int(self.det_model.net_info['height'])
         assert self.det_inp_dim % 32 == 0
         assert self.det_inp_dim > 32
-        self.det_model.cuda()
+        self.det_model
         self.det_model.eval()
 
         self.stopped = False
@@ -318,7 +318,7 @@ class DetectionLoader:
 
             with torch.no_grad():
                 # Human Detection
-                img = img.cuda()
+                img = img
                 prediction = self.det_model(img, CUDA=True)
                 # NMS process
                 dets = dynamic_write_results(prediction, opt.confidence,
@@ -434,7 +434,7 @@ class VideoDetectionLoader:
         self.det_inp_dim = int(self.det_model.net_info['height'])
         assert self.det_inp_dim % 32 == 0
         assert self.det_inp_dim > 32
-        self.det_model.cuda()
+        self.det_model
         self.det_model.eval()
 
         self.stream = cv2.VideoCapture(path)
@@ -492,9 +492,9 @@ class VideoDetectionLoader:
                 ht = inp[0].size(1)
                 wd = inp[0].size(2)
                 # Human Detection
-                img = Variable(torch.cat(img)).cuda()
+                img = Variable(torch.cat(img))
                 im_dim_list = torch.FloatTensor(im_dim_list).repeat(1,2)
-                im_dim_list = im_dim_list.cuda()
+                im_dim_list = im_dim_list
 
                 prediction = self.det_model(img, CUDA=True)
                 # NMS process
