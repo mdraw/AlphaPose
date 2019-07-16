@@ -38,7 +38,7 @@ parser.add_argument('--nStack', default=4, type=int,
                     help='Number of hourglasses to stack')
 
 "----------------------------- Hyperparameter options -----------------------------"
-parser.add_argument('--fast_inference', default=True, type=bool,
+parser.add_argument('--fast_inference', action='store_true',
                     help='Fast inference')
 parser.add_argument('--use_pyranet', default=True, type=bool,
                     help='use pyranet')

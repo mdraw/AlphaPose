@@ -50,8 +50,10 @@ if __name__ == "__main__":
     # Load pose model
     pose_dataset = Mscoco()
     if args.fast_inference:
+        print('Using fast inference...')
         pose_model = InferenNet_fast(4 * 1 + 1, pose_dataset)
     else:
+        print('Using slow, more accurate inference...')
         pose_model = InferenNet(4 * 1 + 1, pose_dataset)
     pose_model
     pose_model.eval()
